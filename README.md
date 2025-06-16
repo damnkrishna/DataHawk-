@@ -97,3 +97,7 @@ bash run_osint.sh phone +918595855121
 - **Permission errors**: Ensure scripts are executable with `chmod +x script_name.sh`
 - **Tool installation failures**: Check internet connection and try running setup script again
 - **Python version conflicts**: Verify you're using Python 3.11 with `python --version`
+
+
+## Blog link 
+https://github.com/damnkrishna/CyberGaurd-j/blob/main/project-blog/Datahawk.md
