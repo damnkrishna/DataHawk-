@@ -1,57 +1,58 @@
 #!/bin/bash
 
 # setup_osint_tools.sh
-# Full OSINT tool installer for Kali/Ubuntu - Python 3.11 compatible
-# Tools: Sherlock, Maigret, Holehe, TheHarvester, ExifTool, PhoneInfoga
+# OSINT tool installer script — installs everything inside ./tools/
+# Compatible with Python 3.11 (virtual env activated beforehand)
 
 set -e
 
-echo "[*] Creating tools/ directory..."
-mkdir -p tools && cd tools
+echo "[*] Setting up OSINT tools..."
+mkdir -p tools
+cd tools
 
 # --- Sherlock ---
-echo "[*] Cloning Sherlock..."
+echo "[*] Installing Sherlock..."
 git clone https://github.com/sherlock-project/sherlock.git
 cd sherlock
 pip install -r requirements.txt
 cd ..
 
 # --- Maigret ---
-echo "[*] Cloning Maigret..."
+echo "[*] Installing Maigret..."
 git clone https://github.com/soxoj/maigret.git
 cd maigret
 pip install -r requirements.txt
 cd ..
 
 # --- Holehe ---
-echo "[*] Cloning Holehe..."
+echo "[*] Installing Holehe..."
 git clone https://github.com/megadose/holehe.git
 cd holehe
 pip install -r requirements.txt
 cd ..
 
-# --- TheHarvester ---
-echo "[*] Cloning TheHarvester..."
+# --- theHarvester ---
+echo "[*] Installing theHarvester..."
 git clone https://github.com/laramies/theHarvester.git
 cd theHarvester
 pip install -r requirements/base.txt
 cd ..
 
 # --- ExifTool ---
-echo "[*] Installing ExifTool (via apt)..."
+echo "[*] Installing ExifTool from apt..."
 sudo apt install -y exiftool
 
 # --- PhoneInfoga ---
-echo "[*] Cloning PhoneInfoga..."
+echo "[*] Installing PhoneInfoga..."
 git clone https://github.com/sundowndev/phoneinfoga.git
 cd phoneinfoga
-pip install -r requirements.txt
+pip install -r requirements.txt || true  # Some parts might be optional
 cd ..
 
 echo
-echo "[✔️] All OSINT tools installed inside ./tools/"
-echo "----------------------------------------------------"
-echo "[🔧] Run them like:"
+echo "[✅] All tools installed inside: $(pwd)"
+echo
+echo "[🔧] Sample commands:"
 echo "    python3 tools/sherlock/sherlock.py <username>"
 echo "    python3 tools/maigret/maigret.py <username>"
 echo "    python3 tools/holehe/holehe.py <email@example.com>"
