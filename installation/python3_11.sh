@@ -1,34 +1,42 @@
 #!/bin/bash
 
-# install_python3_11.sh
-# Safe installation script for Python 3.11.9 on Kali/Ubuntu systems
-# Will not interfere with system Python
+# install_python_env.sh
+# Safe installer for Python 3.11.9 + virtual environment setup
+# Creates project structure for later tool installation
 
 set -e
 
-echo "[*] Installing build dependencies for Python..."
+echo "[*] Step 1: Installing dependencies..."
 sudo apt update && sudo apt install -y \
     wget build-essential zlib1g-dev libncurses5-dev \
     libgdbm-dev libnss3-dev libssl-dev libreadline-dev \
     libffi-dev libsqlite3-dev libbz2-dev liblzma-dev \
-    uuid-dev tk-dev libdb-dev
+    uuid-dev tk-dev libdb-dev git
 
-echo "[*] Downloading Python 3.11.9 source code..."
+echo "[*] Step 2: Downloading and compiling Python 3.11.9..."
 cd /tmp
 wget https://www.python.org/ftp/python/3.11.9/Python-3.11.9.tgz
 tar -xf Python-3.11.9.tgz
 cd Python-3.11.9
-
-echo "[*] Configuring Python 3.11 with optimizations..."
 ./configure --enable-optimizations
-
-echo "[*] Compiling Python 3.11 (this might take a while)..."
 make -j$(nproc)
-
-echo "[*] Installing Python 3.11 safely using altinstall..."
 sudo make altinstall
 
+echo "[✔️] Python 3.11.9 installed successfully."
+
+echo "[*] Step 3: Setting up project directory at ~/osint-suite..."
+mkdir -p ~/osint-suite/tools
+cd ~/osint-suite
+
+echo "[*] Step 4: Creating virtual environment..."
+python3.11 -m venv venv
+source venv/bin/activate
+
+echo "[✔️] Virtual environment created and activated."
 echo
-echo "[✔️] Python 3.11.9 installed successfully!"
-echo "[✔️] Run 'python3.11 --version' to verify."
-echo "[🧠] Use python3.11 explicitly — your system's Python is untouched."
+
+echo "[✅] DONE! Your OSINT project environment is ready."
+echo "📁 Directory: ~/osint-suite"
+echo "🧪 Python:    $(python --version)"
+echo "📦 To activate environment later:"
+echo "     source ~/osint-suite/venv/bin/activate"
