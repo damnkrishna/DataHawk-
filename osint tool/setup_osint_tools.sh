@@ -39,6 +39,13 @@ git clone https://github.com/laramies/theHarvester.git .
 pip install .
 cd ..
 
+# --- PhoneInfoga ---
+echo "[*] Installing PhoneInfoga..."
+mkdir phoneinfoga && cd phoneinfoga
+git clone https://github.com/sundowndev/phoneinfoga.git .
+pip install .
+chmod +x phoneinfoga
+cd ..
 
 echo
 echo "[✅] All OSINT tools installed into separate folders under $(pwd)"
