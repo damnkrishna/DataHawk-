@@ -32,6 +32,9 @@ elif [ "$MODE" == "email" ]; then
 elif [ "$MODE" == "domain" ]; then
     echo "[*] Running theHarvester..."
     python3 tools/theHarvester/theHarvester.py -d "$TARGET" -b bing
+elif [ "$MODE" == "phone" ]; then
+    echo "[*] Running PhoneInfoga..."
+    ./tools/phoneinfoga/phoneinfoga scan -n "$TARGET"
 
 else
     echo "[!] Invalid input type. Use 'username', 'email', or 'domain'."
